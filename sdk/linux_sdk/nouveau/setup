@@ -1,0 +1,66 @@
+#lspci -vv
+GRAPHICS CARD VS GPU
+Graphics cards using the NVIDIA GF117M GPU:
+	NVIDIA GEFORCE 820M (I am using )  which is a legacy GPU https://www.nvidia.com/en-us/drivers/unix/legacy-gpu/
+	NVIDIA GEFORCE GT 820M (NOT THIS)
+lspci -k | grep -A 2 -E "(VGA|3D)"
+pacman -Q | grep "nvidia"
+pacman -R all_nvidia_packages+nouveau
+yay -S nvidia-390xx
+yay -S lib32-nvidia-390xx-utils
+nvidia-smi
+
+
+
+
+xrandr --setmonitor dell auto eDP1,HDMI1
+
+
+
+HYbrid graphics card,because I have intel graphics card inside and also Nvidia graphics card.
+NVIDIA Optimus is a technology that allows an Intel integrated GPU and discrete NVIDIA GPU to be built into and accessed by a laptop.
+3  methods:
+	use intel graphics only
+	use NVIDIA graphics only
+	use NVIDIA GPU when needed and keep it powered off to save power
+		using prime render offload
+		using optimus-manager
+		using nvidia-xrun
+		using bumblebee : Allows application with NVIDIA
+		using nouveau
+		
+
+
+
+
+Bumblebee is a software implementation comprising two parts:
+    1. Render programs off-screen on the dedicated video card and display it on the screen using the integrated video card. This bridge is provided by VirtualGL or 
+    primus (read further) and connects to a X server started for the discrete video card.
+    
+    2. Disable the dedicated video card when it is not in use (see the #Power management section)
+
+install: 
+	bumblebee 
+	mesa 
+	xf86-video-intel
+	Xorg
+	lib32-virtualgl
+	lib32-nvidia-utils
+	nvidia:
+		For GeForce 630-900, 10-20, and Quadro/Tesla/Tegra K-series cards and newer [NVE0, NV110 and newer family cards from around 2010 and later], install 
+		the nvidia package (for use with the linux kernel) or nvidia-lts (for use with the linux-lts kernel) package.
+		The 390.xx driver supports this. 820M    or  GT 820M
+	
+	
+    
+    
+# sudo pacman -S mesa-demos
+# sudo pacman -S mesa
+# sudo pacman -S lib32-mesa
+# sudo pacman -S xf86-video-nouveau
+# modprobe nouveau
+# rmmod nvidia
+
+# sudo pacman -S bumblebee
+# sudo pacman -S xf86-video-intel
+
