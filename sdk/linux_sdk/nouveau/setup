@@ -1,24 +1,19 @@
-#lspci -vv
-GRAPHICS CARD VS GPU
-Graphics cards using the NVIDIA GF117M GPU:
-	NVIDIA GEFORCE 820M (I am using )  which is a legacy GPU https://www.nvidia.com/en-us/drivers/unix/legacy-gpu/
-	NVIDIA GEFORCE GT 820M (NOT THIS)
-lspci -k | grep -A 2 -E "(VGA|3D)"
-pacman -Q | grep "nvidia"
-pacman -R all_nvidia_packages+nouveau
-yay -S nvidia-390xx
-yay -S lib32-nvidia-390xx-utils
-nvidia-smi
+lspci -vvv -nnn | grep -A  10 -E "3D" and lspci -k | grep -A  10 -E "3D" 
+	outputs that my graphics card is NVIDIA GEFORCE 820M based on fermi architecture with 2.1 compute capability (not NVIDIA GEFORCE GT 820M) and inside it there is a  NVIDIA GF117M GPU
+	My graphics card is a hybrid graphics card,because I have intel graphics card inside and also Nvidia graphics card.
+	Hardware generation vs compute capability and cuda support
+supported technology
+	CUDA 2.1
+	Optimus       :allows an Intel integrated GPU and discrete NVIDIA GPU to be built into and accessed by a laptop. (bumblebee)
+	Physx
+	GPU Boost 2.0
+	DirectX 12
+	OpenGL 4.5
 
 
+CUDA SDK 8.0 support for compute capability 2.0 – 6.x (Fermi, Kepler, Maxwell, Pascal). Last version with support for compute capability 2.x (Fermi) (Pascal GTX 1070Ti Not Supported).
 
 
-xrandr --setmonitor dell auto eDP1,HDMI1
-
-
-
-HYbrid graphics card,because I have intel graphics card inside and also Nvidia graphics card.
-NVIDIA Optimus is a technology that allows an Intel integrated GPU and discrete NVIDIA GPU to be built into and accessed by a laptop.
 3  methods:
 	use intel graphics only
 	use NVIDIA graphics only
@@ -41,19 +36,18 @@ Bumblebee is a software implementation comprising two parts:
 
 install: 
 	bumblebee 
-	mesa 
+	mesa:  An open-source implementation of the OpenGL specification.
+	mesa-demos : use glxgears to test if if Bumblebee works with your Optimus system
 	xf86-video-intel
 	Xorg
 	lib32-virtualgl
 	lib32-nvidia-utils
 	nvidia:
-		For GeForce 630-900, 10-20, and Quadro/Tesla/Tegra K-series cards and newer [NVE0, NV110 and newer family cards from around 2010 and later], install 
-		the nvidia package (for use with the linux kernel) or nvidia-lts (for use with the linux-lts kernel) package.
-		The 390.xx driver supports this. 820M    or  GT 820M
+		The NVIDIA GeForce 820M actually uses nvidia-390xx-{dkms,utils}
 	
 	
     
-    
+### yay -S nvidia-390xx-dkms nvidia-smi works
 # sudo pacman -S mesa-demos
 # sudo pacman -S mesa
 # sudo pacman -S lib32-mesa
@@ -61,6 +55,8 @@ install:
 # modprobe nouveau
 # rmmod nvidia
 
-# sudo pacman -S bumblebee
+# sudo pacman -S bumblebee  optirun glxgears  and optirun glxspheres64 and alternatives primusrun and pvkrun
 # sudo pacman -S xf86-video-intel
+
+https://en.wikipedia.org/wiki/CUDA
 

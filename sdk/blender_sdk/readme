@@ -26,3 +26,11 @@ cycle vs evee
 
 2. motion graphics
 	Natron
+
+Project>Scene>Tools>Modes
+
+you can add a material to Object or Object's Data
+COlision works on rigid body, so make sure the object is a rigid  or add rigid body property. passive means that object stays but rigid.
+	1. object with rigid+active+animated
+	2. object with rigid+active
+	3. object wuth rigid+passive
